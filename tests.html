@@ -1,0 +1,171 @@
+<html>
+<head runat="server">
+    <title>jQuery Extensions Tests</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="qunit.js"></script>
+	<script src="jquery.extensions.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
+	
+    <script type="text/javascript">
+    	function run()
+    	{
+			module("Extensions");
+			test("isNumber", function()
+			{
+				var anInt = new Number(42);
+				var aFloat = new Number(42.500);
+				equals(jQuery.isNumber(anInt),true);
+				equals(jQuery.isNumber(aFloat),true);
+				
+				equals(jQuery.isNumber(42),true);
+				equals(jQuery.isNumber(42.235),true);
+				
+				equals(jQuery.isNumber("test"),false);
+				equals(jQuery.isNumber([]),false);
+				equals(jQuery.isNumber(true),false);
+				equals(jQuery.isNumber(undefined),false);
+				equals(jQuery.isNumber(null),false);
+			});
+			
+			test("isBoolean", function()
+			{
+				var aBool = new Boolean(true);
+				var aBool2 = new Boolean(true);
+				
+				equals(jQuery.isBoolean(aBool),true);
+				equals(jQuery.isBoolean(aBool2),true);
+				
+				equals(jQuery.isBoolean(true),true);
+				equals(jQuery.isBoolean(false),true);
+				
+				equals(jQuery.isBoolean(1),false);
+				equals(jQuery.isBoolean(0),false);
+				equals(jQuery.isBoolean(1.235),false);
+				equals(jQuery.isBoolean("test"),false);
+				equals(jQuery.isBoolean([]),false);
+				equals(jQuery.isBoolean(undefined),false);
+				equals(jQuery.isBoolean(null),false);
+			});
+			
+			test("isNull", function()
+			{
+				var x = null;
+				var y;
+				equals(jQuery.isNull(x),true);
+			
+				equals(jQuery.isNull(y),false);	
+				equals(jQuery.isNull("xxx"),false);				
+				equals(jQuery.isNull(42),false);
+				equals(jQuery.isNull(42.235),false);
+				equals(jQuery.isNull("test"),false);
+				equals(jQuery.isNull([]),false);
+				equals(jQuery.isNull(false),false);
+				equals(jQuery.isNull(undefined),false);
+			});
+			
+			test("isUndefined", function()
+			{
+				var x;
+				var y = null;
+				var z = "test";
+				
+				equals(jQuery.isUndefined(x),true);
+				equals(jQuery.isUndefined(y),false);	
+				equals(jQuery.isUndefined(z),false);	
+			});
+			
+			test("isNullOrUndefined", function()
+			{
+				var x;
+				var y = null;
+				var z = "test";
+				
+				equals(jQuery.isNullOrUndefined(x),true);
+				equals(jQuery.isNullOrUndefined(y),true);	
+				equals(jQuery.isNullOrUndefined(z),false);	
+			});
+			
+			test("isString", function()
+			{
+				equals(jQuery.isString("test"),true);
+				equals(jQuery.isString('test'),true);			
+				
+				equals(jQuery.isString(42),false);
+				equals(jQuery.isString(42.235),false);
+				equals(jQuery.isString(false),false);
+				equals(jQuery.isString([]),false);
+				equals(jQuery.isString(undefined),false);
+				equals(jQuery.isString(null),false);
+			});
+			
+			test("isArray", function()
+			{
+				equals(jQuery.isArray([]),true);
+				equals(jQuery.isArray([1,2,3]),true);
+				equals(jQuery.isArray(new Array(1)),true);
+				
+				equals(jQuery.isArray(42),false);
+				equals(jQuery.isArray(42.235),false);
+				equals(jQuery.isArray("test"),false);
+				equals(jQuery.isArray(false),false);
+				equals(jQuery.isArray(undefined),false);
+				equals(jQuery.isArray(null),false);
+			});
+			
+			test("emptyString", function()
+			{
+				equals(jQuery.emptyString(""),true);
+				equals(jQuery.emptyString(null),true);
+				equals(jQuery.emptyString(undefined),true);
+				equals(jQuery.emptyString("the quick brown fox"),false);
+				
+				var f = false;
+				try
+				{
+					f = jQuery.emptyString([]);
+				}
+				catch (ex)
+				{
+					equals(f,false);
+				}
+			});
+			
+			test("startsWith", function()
+			{
+				equals(jQuery.startsWith("the quick brown fox","the"),true);
+				equals(jQuery.startsWith("the quick brown fox","cow"),false);
+			});
+			
+			test("endsWith", function()
+			{
+				equals(jQuery.endsWith("the quick brown fox","fox"),true);
+				equals(jQuery.endsWith("the quick brown fox","brown fox"),true);
+				equals(jQuery.endsWith("the quick brown fox","very long search that is longer than the original"),false);
+				equals(jQuery.endsWith("the quick brown fox",""),false);
+				equals(jQuery.endsWith(null,"1234"),false);
+				equals(jQuery.endsWith("","1234"),false);
+				equals(jQuery.endsWith("the quick brown fox","cow"),false);
+			});
+			
+			test("formatString", function()
+			{
+				equals(jQuery.formatString("Now is the {0} of our {1}","winter","discontent"),"Now is the winter of our discontent");
+				equals(jQuery.formatString("Now is the {0} of our {1}","winter"),"Now is the winter of our {1}");
+			});
+			
+			test("log", function()
+			{
+				// Untestable
+			});
+    	}
+		$(document).ready(run);
+    </script>
+</head>
+<body>
+	<h1 id="qunit-header">jQuery Extensions Unit Tests</h1>
+	<h2 id="qunit-banner"></h2>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="qunit-main"></div>
+</body>
+</html>

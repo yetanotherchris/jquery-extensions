@@ -1,0 +1,105 @@
+<html>
+<head runat="server">
+    <title>jQuery Form Extensions Tests</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="qunit.js"></script>
+	<script src="jquery.form-extensions.min.js" type="text/javascript"></script>
+	<script src="tests-singleselect.js" type="text/javascript"></script>
+	<script src="tests-multiselect.js" type="text/javascript"></script>
+	<script src="tests-dropdown.js" type="text/javascript"></script>
+	<script src="tests-radiobox.js" type="text/javascript"></script>
+	<script src="tests-checkbox.js" type="text/javascript"></script>
+	<script src="tests-misc.js" type="text/javascript"></script>	
+	<link rel="stylesheet" href="qunit.css" type="text/css" media="screen" />
+	
+    <script type="text/javascript">
+    	function run()
+    	{
+			miscTests();
+			radioBoxTests();
+			checkBoxTests();
+			singleSelectTests();
+			multiSelectTests();
+			dropDownTests();
+    	}
+		$(document).ready(run);
+    </script>
+</head>
+<body>
+	<h1 id="qunit-header">jQuery Form Extensions Unit Tests</h1>
+	<h2 id="qunit-banner"></h2>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="qunit-main"></div>
+ 
+    <form id="form1">
+    <div style="display:none">
+		<!-- The hr/br is left in if you want to see the form -->
+		<input type="text" id="_textbox" name="_textbox" value="text" /><br />
+		<input type="password" id="_password" name="_password" value="secret" /><br />
+		<input type="hidden" id="_hidden" name="_hidden" value="hidden value" /><br />
+		<textarea id="_textarea">Ipsum text</textarea>
+		<hr />
+	
+		<input type="radio" id="_radio1_1" name="aradio" value="1" />1<br />
+		<input type="radio" id="_radio1_2" name="aradio" value="2" />2<br />
+		<input type="radio" id="_radio1_3" name="aradio" value="3" checked="checked" />3<br />
+		<input type="radio" id="_radio1_4" name="aradio" value="4" />4<br />
+		<input type="radio" id="_radio1_5" name="aradio" value="5" />5<br />
+		<hr />	
+		
+		<input type="checkbox" id="_checkbox1" value="1" />1<br />
+		<input type="checkbox" id="_checkbox2" value="2" checked="checked"/>2<br />
+		<hr />
+		
+		<select id="_basic-select" size="2">
+			<optgroup label="Vegetables">
+				<option value="carrot" selected="selected">Carrot</option>
+				<option value="pea">Pea</option>
+				<option value="lettuce">Lettuce</option>
+			</optgroup>
+			
+			<optgroup label="Meat">
+				<option value="chicken">chicken</option>
+				<option value="Beef">Beef</option>
+				<option value="Pork">Pork</option>
+			</optgroup>
+		</select>
+		<hr />
+		
+		<select id="_multiselect" multiple="multiple" size="4">
+			<optgroup label="Fictional names">
+				<option value="Ford Prefect" selected="selected">Ford Prefect</option>
+				<option value="Brian">Brian</option>
+				<option value="Stewie" selected="selected">Stewie</option>
+			</optgroup>
+			
+			<optgroup label="Prime minister names">
+				<option value="Tony">Tony</option>
+				<option value="Gordon">Gordon</option>
+				<option value="Maggie">Maggie</option>
+			</optgroup>
+		</select>
+		<hr />
+		
+		<select id="_dropdownlist">
+			<optgroup label="Cars">
+				<option value="ford" selected="selected">ford</option>
+				<option value="toyota">toyota</option>
+				<option value="bmw">bmw</option>
+			</optgroup>
+			
+			<optgroup label="Computers">
+				<option value="Mac">Mac</option>
+				<option value="IBM">IBM</option>
+			</optgroup>
+		</select>
+		<hr />
+		
+		<input id="_basicButton" type="button" value="click me" /><br />
+		<input id="_submitButton" type="submit" value="click me" /><br />
+		<input id="_resetButton" type="reset" value="click me" /><br />
+    </div>
+    </form>
+</body>
+</html>
