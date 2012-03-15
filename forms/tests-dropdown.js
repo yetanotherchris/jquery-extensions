@@ -54,4 +54,20 @@ function dropDownTests()
 	{
 		equals($("#_dropdownlist").itemExists("IBM"),true);
 	});
+	
+	test("selectByIndex", function()
+	{
+		$("#_dropdownlist").selectByIndex(1);
+		var vals = $("#_dropdownlist").selectedValues();
+		equals(vals.length,1);
+		equals(vals[0],"toyota");
+	});
+	
+	test("selectByValue", function()
+	{
+		$("#_dropdownlist").selectByValue("IBM");
+		var vals = $("#_dropdownlist").selectedValues();
+		equals(vals.length,1);
+		equals(vals[0],"IBM");
+	});
 }
