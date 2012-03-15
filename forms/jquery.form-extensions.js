@@ -487,6 +487,46 @@
 	};
 })(jQuery);
 
+(function($)
+{
+	/* Selects an item in a drop down list by its index.
+	@param index The selected drop down list item index to select, this is zero based. 
+	*/
+	$.fn.selectByIndex = function(index)
+	{
+		///	<summary>
+        ///	Selects an item in a drop down list by its index.
+        ///	</summary>
+		///	<param name="index" type="Number">The selected drop down list item index to select, this is zero based. </param>
+		var current = jQuery(this);
+
+		if (current.isSelectBox() || current.isMultiSelectBox() || current.isDropDownList())
+		{
+			jQuery("#" + current.attr("id") + " option:eq(" +index+ ")").attr("selected","selected");
+		}
+	};
+})(jQuery);
+
+(function($)
+{
+	/* Selects an item in a drop down list by its index.
+	@param value The selected drop down list item value to select. 
+	*/
+	$.fn.selectByValue = function(value)
+	{
+		///	<summary>
+        ///	Selects an item in a drop down list by its index.
+        ///	</summary>
+		///	<param name="index" type="Number">The selected drop down list item value to select. </param>
+		var current = jQuery(this);
+
+		if (current.isSelectBox() || current.isMultiSelectBox() || current.isDropDownList())
+		{
+			jQuery("#" + current.attr("id") + " option[value='" +value+ "']").attr("selected","selected");
+		}
+	};
+})(jQuery);
+
 /* 
 Used for debugging	
 
