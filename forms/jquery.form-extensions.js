@@ -1,11 +1,11 @@
 /*
- * jQuery Form Extensions 1.0
+ * jQuery Form Extensions 1.1
  * http://code.google.com/p/jquery-form-extensions/
  *
- * Copyright (c) 2009 C.Small
+ * Copyright (c) 2012 C.Small
  *
  * Licensed under the MIT license.
- * Date: 21:31 20/05/2009
+ * Date: 12:31 28/04/2012
  */
 (function($)
 {
@@ -30,10 +30,35 @@
 		///	Retrieves the form field type based on its type attribute.
 		///	</summary>
 		///	<returns type="String" />
+		
+		// This is legacy support for the previous jQuery versions that simply
+		// returned a string from the "type" attribute.
 		if (jQuery(this).elementExists())
-			return jQuery(this).attr("type");
-		else
-			return "";
+		{
+			var current = jQuery(this);
+			var type = current.attr("type");
+			
+			if (typeof type !== "undefined" && type !== "")
+			{
+				return type;
+			}
+			else if (current.is("textarea"))
+			{
+				return "textarea";
+			}
+			else
+			{
+				if (current.is("select"))
+				{
+					if (current.isMultiSelectBox())
+						return "select-multiple";
+					else
+						return "select-one";
+				}
+			}
+		}
+		
+		return "";
 	};
 })(jQuery);
 
@@ -61,7 +86,7 @@
 		///	Determines if the element is a textarea.
 		///	</summary>
 		///	<returns type="Boolean" />
-		return (jQuery(this).formElementType() === "textarea");
+		return (jQuery(this).is("textarea"));
 	};
 })(jQuery);
 
@@ -173,21 +198,16 @@
 		///	Determines if the element is a single selection 2 or more rows select box.
 		///	</summary>
 		///	<returns type="Boolean" />
-		
-		var type = jQuery(this).formElementType();
-		var size = (this).attr("size");
-		
-		if (type !== "select-one")
+		if (jQuery(this).is("select"))
 		{
-			return false;
+			var size = jQuery(this).attr("size");
+			var multiple = jQuery(this).attr("multiple");
+
+			if ((typeof multiple === "undefined" || multiple === false || multiple === "") && typeof size !== "undefined" && parseInt(size) > 1)
+				return true;
 		}
-		else
-		{
-			if (typeof size === "undefined")
-				return false;
-			else
-				return (parseInt(size) > 1);
-		}
+		
+		return false;
 	};
 })(jQuery);
 
@@ -201,7 +221,19 @@
 		///	Determines if the element is a multi selection select box. 
 		///	</summary>
 		///	<returns type="Boolean" />
-		return (jQuery(this).formElementType() === "select-multiple");
+		if (jQuery(this).is("select"))
+		{
+			var size = jQuery(this).attr("size");
+			var multiple = jQuery(this).attr("multiple");
+
+			if ((typeof multiple !== "undefined" && (multiple === true || multiple === "multiple")) && 
+				typeof size !== "undefined" && parseInt(size) > 1)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	};
 })(jQuery);
 
@@ -216,20 +248,18 @@
 		///	Determines if the element is a drop down list, that is a select box with 1 row and items appear when clicked, rather than just a scrollbar.
 		///	</summary>
 		///	<returns type="Boolean" />
-		var type = jQuery(this).formElementType();
-		var size = (this).attr("size");
-		
-		if (type !== "select-one")
+		if (jQuery(this).is("select"))
 		{
-			return false;
-		}
-		else
-		{
-			if (typeof size === "undefined")
+			var size = jQuery(this).attr("size");
+			var multiple = jQuery(this).attr("multiple");
+
+			if (typeof multiple !== "undefined" && (multiple === true || multiple === "multiple"))
+				return false;
+			else if (typeof size === "undefined" || parseInt(size) <= 1)
 				return true;
-			else
-				return (parseInt(size) <= 1);
 		}
+
+		return false;
 	};
 })(jQuery);
 
@@ -519,7 +549,7 @@
         ///	</summary>
 		///	<param name="index" type="Number">The selected drop down list item value to select. </param>
 		var current = jQuery(this);
-
+		
 		if (current.isSelectBox() || current.isMultiSelectBox() || current.isDropDownList())
 		{
 			jQuery("#" + current.attr("id") + " option[value='" +value+ "']").attr("selected","selected");
