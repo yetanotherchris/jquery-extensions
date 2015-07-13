@@ -38,7 +38,7 @@ Full intellisense documentation is available with the full download (the unminif
  * formatString(format,args)
  * log(format,args)
 
-=jQuery Form Extensions=
+#jQuery Form Extensions
 Jquery Form Extensions is a small plugin to assist with common form-related tasks in jQuery.
 
 It doesn't provide automated form validation, form to JSON or anything similar. It's a set of methods for common form tasks. Most of these are easily achieved with jQuery, this plugin aims to give [http://en.wikipedia.org/wiki/Fluent_interface a more fluent API] which in the process helps to make the code more readable, testable and concise.
