@@ -1,35 +1,28 @@
-=jQuery Extensions=
+#jQuery Extensions
 jQuery extensions is a set of functions added to the jQuery object for common Javascript tasks and form tasks.
 
-===Download===
+###Download
 The downloads comes as either the minified script, or a full zip with the tests (and example usage) and un-minified source. The un-minified source contains Javascript documentation and Visual Studio friendly documentation too.
 
-=Nuget=
+#Nuget
 You can install the two plugin files via nuget. By default it installs these into the Scripts folder, and will give you both the minified and documented versions of the files.
 
-{{{
-#!python
-pm> Install-Package jQueryExtensions
-}}}
+	pm> Install-Package jQueryExtensions
 
-===Examples===
+###Examples
 
-{{{
-#!javascript
-$.isNumber(42);
+	$.isNumber(42);
+	
+	var x;
+	$.isUndefined(x);
+	$.isNullOrUndefined(x);
+	$.isString(false);
+	
+	$.emptyString("the quick brown fox");
+	$.startsWith("the quick brown fox","the");
+	$.formatString("Here is the {0} and {2}","first","second");
 
-var x;
-$.isUndefined(x);
-$.isNullOrUndefined(x);
-$.isString(false);
-
-$.emptyString("the quick brown fox");
-$.startsWith("the quick brown fox","the");
-$.formatString("Here is the {0} and {2}","first","second");
-
-}}}
-
-===Documentation===
+###Documentation
 Full intellisense documentation is available with the full download (the unminified versions of the JS files). These come with the Nuget package.
 
  * isNumber(object)
@@ -52,37 +45,34 @@ It doesn't provide automated form validation, form to JSON or anything similar. 
 
 Coming from a .NET background, the naming of the functions is geared towards the ASP.NET controls, however it should be intuitive to most frameworks.
 
-===Download===
+###Download
 The downloads comes as either the minified script, or a full zip with the tests (and example usage) and un-minified source. The un-minified source contains Javascript documentation and Visual Studio friendly documentation too.
 
-===Example===
+###Example
 
-{{{
-#!javascript
-// elementExists is also added
-if ($("#someid").elementExists())
-  alert("found it");
+	// elementExists is also added
+	if ($("#someid").elementExists())
+	  alert("found it");
+		
+	// Select box related
+	$("#mydropdown").isDropDownList();
 	
-// Select box related
-$("#mydropdown").isDropDownList();
+	// Can be any of the items from a list of radio boxes - it will use the name
+	$("#randomradioboxitem").isRadioBox("myvalue");
+	$("#radioboxitem").isSelected("myvalue");
+	
+	// The value of the item selected. For multiple selects it's the first value
+	$("#radioboxitem").selectedValue();
+	
+	// Various, others include password, hidden. Buttons also
+	$("#mytextbox").isTextBox();
+	$("#mycheck").isCheckBox();
+	$("#multi-select").isSelected("one", "two", "three");
+	
+	// Returns the 'type' property or 'select-one' 'select-multiple'
+	var fieldType = $("#someid").formElementType();
 
-// Can be any of the items from a list of radio boxes - it will use the name
-$("#randomradioboxitem").isRadioBox("myvalue");
-$("#radioboxitem").isSelected("myvalue");
-
-// The value of the item selected. For multiple selects it's the first value
-$("#radioboxitem").selectedValue();
-
-// Various, others include password, hidden. Buttons also
-$("#mytextbox").isTextBox();
-$("#mycheck").isCheckBox();
-$("#multi-select").isSelected("one", "two", "three");
-
-// Returns the 'type' property or 'select-one' 'select-multiple'
-var fieldType = $("#someid").formElementType();
-}}}
-
-===Documentation===
+###Documentation
 The none-minified JS files have full intellisense documentation.
 
 Functions added:
@@ -103,7 +93,7 @@ Functions added:
  * isChecked()
  * itemExists(item) - item is a string value to compare
 
-===Select box (and radiobox) related===
+###Select box (and radiobox) related
  * isSelected(val) - val is a string value to compare
  * selectedItem() - returns a jQuery object
  * firstSelectedItem() - returns a jQuery object
@@ -115,5 +105,5 @@ Functions added:
 
 The textbox and button functions don't necessarily add much value to the plugin, but are there for completeness.
 
-===Contributing===
+###Contributing
 Recommendations for improvements to the source or new functions are welcome, or contributing as a member. Some features that would be nice to add would be add/removal functions for select boxes.
