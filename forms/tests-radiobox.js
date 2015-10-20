@@ -12,7 +12,7 @@ function radioBoxTests()
 	});
 	test("selectedValue", function()
 	{
-		equals($("#_radio1_2").selectedValue("3"),"3");
+		equals($("#_radio1_2").selectedValue(),"3");
 	});
 	test("selectedValues", function()
 	{

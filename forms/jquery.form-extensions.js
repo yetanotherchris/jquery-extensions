@@ -479,7 +479,7 @@
 {
 	/* Determines if the provided item exists as a value in a radiobox or select box list
 	   @param item The value to check.
-	*/
+	   @returns True if the item exists; otherwise, false.	*/
 	$.fn.itemExists = function(item)
 	{
 		///	<summary>
@@ -539,7 +539,7 @@
 
 (function($)
 {
-	/* Selects an item in a drop down list by its index.
+	/* Selects an item in a drop down list by value.
 	@param value The selected drop down list item value to select. 
 	*/
 	$.fn.selectByValue = function(value)
