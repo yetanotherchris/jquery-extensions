@@ -12,7 +12,7 @@ function checkBoxTests()
 	});
 	test("selectedValue", function()
 	{
-		equals($("#_checkbox1").selectedValue("1"),"1");
+		equals($("#_checkbox1").selectedValue(),"1");
 	});
 	test("selectedValues", function()
 	{

@@ -73,7 +73,7 @@ The downloads comes as either the minified script, or a full zip with the tests 
 	var fieldType = $("#someid").formElementType();
 
 ###Documentation
-The none-minified JS files have full intellisense documentation.
+The non-minified JS files have full intellisense documentation.
 
 Functions added:
  * elementExists()  
